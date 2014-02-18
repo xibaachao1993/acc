@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<link href="__PUBLIC__/images/style.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/kindeditor/themes/default/default.css"/>
+<script type="text/javascript" src="__PUBLIC__/kindeditor/kindeditor.js"></script>
+<script src="__PUBLIC__/kindeditor/lang/zh_CN.js"></script>
+		<script>
+			KindEditor.ready(function(K) {
+				var editor = K.editor({
+					allowFileManager : true
+				});
+				K('#image1').click(function() {
+					editor.loadPlugin('image', function() {
+						editor.plugin.imageDialog({
+							imageUrl : K('#url1').val(),
+							clickFn : function(url, title, width, height, border, align) {
+								K('#url1').val(url);
+								editor.hideDialog();
+							}
+						});
+					});
+				});
+			});
+		</script>
+<style type="text/css">
+body {
+	background: #FFF
+}
+input {
+	border: 1px solid
+}
+.l{width:600px;}
+</style>
+</head>
+
+<body>
+<div id="contentWrap">
+  <div id="widget table-widget">
+    <div class="pageTitle">添加/修改友情链接</div>
+    <div class="pageColumn">
+      <div class="pageButton"></div>
+      <form action="__URL__/linkupdate" method="post">
+        <input type="hidden" name="id" value="{$one.link_id}" />
+        <table>
+          <tr>
+            <Td style="text-align:right">友情链接标题</Td>
+            <td style="text-align:left"><input class="l" type="text" name="link_title" value="{$one.link_title}" /></td>
+            <td></td>
+          </tr>
+          <tr>
+            <Td  style="text-align:right">友情链接图片</Td>
+            <td  style="text-align:left"><input class="l" type="text" name="link_image" value="{$one.link_image}" id="url1" />
+              <input type="button" value="上传图片" id="image1" /></td>
+            <td></td>
+          </tr>
+          <tr>
+            <Td style="text-align:right">友情链接地址</Td>
+            <td style="text-align:left"><input class="l" type="text" name="link_address" value="{$one.link_address}" /></td>
+            <td></td>
+          </tr>
+          <tR>
+            <td colspan="3"><input type="submit" value="提交"/></td>
+          </tR>
+        </table>
+      </form>
+    </div>
+  </div>
+  <!-- #widget --> 
+</div>
+</body>
+</html>

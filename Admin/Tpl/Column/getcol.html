@@ -1,0 +1,76 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/script/treeTable/vsStyle/jquery.treeTable.css"/>
+    <link href="__PUBLIC__/images/style.css" rel="stylesheet" type="text/css" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>树表控件</title>
+        <script type="text/javascript" src="__PUBLIC__/script/jquery.js"></script>
+        <script src="__PUBLIC__/script/treeTable/jquery.treeTable.js" type="text/javascript"></script>
+        <style type="text/css">
+body {
+	background: #FFF
+}</style>
+        <script type="text/javascript">
+        $(function(){
+            var option = {
+                theme:'vsStyle',
+                expandLevel : 1,
+                onSelect : function($treeTable, id) {
+                    window.console && console.log('onSelect:' + id);
+                }
+
+            };
+            $('#treeTable1').treeTable(option);
+
+            option.theme = 'default';
+            $('#treeTable2').treeTable(option);
+        });
+        </script>
+    </head>
+    <body>
+    <div id="contentWrap">
+	<!--表格控件 -->
+  <div id="widget table-widget">
+    <div class="pageTitle"><a href="__URL__/index">添加栏目</a></div>
+    <div class="pageColumn">
+      <div class="pageButton"></div>
+            <table id="treeTable1" style="width:100%">
+              <thead>
+        <th width="25"><input class="select-all" name="" type="checkbox" value="" /></th>
+          <th width="">栏目编号</th>
+          <th width="">栏目名称</th>
+          <th width="">上级栏目</th>
+          <th width="10%">操作</th>
+            </thead>
+        <tbody>
+          <volist name="list" id="vo">
+            <eq name="vo.col_sid" value="0">
+              <tr id="{$vo.col_id}">
+                <td><span controller="true"></span></td>
+                <td>{$vo.col_id}</td>
+                <td><a href="__URL__/index?id={$vo.col_id}">{$vo.col_name}</a></td>
+                <td>{$vo.col_sid}</td>
+                <td><a href="__URL__/index?id={$vo.col_id}"><img src="__PUBLIC__/images/icon/edit2.png" width="16" height="16" /></a></td>
+              </tr>
+            </eq>
+            <volist name="list" id="vo1">
+              <eq name="vo.col_id" value="$vo1.col_sid">
+                <tr id="{$vo1.col_id}" pid="{$vo.col_id}">
+                  <td><span controller="true"></span></td>
+                  <td>{$vo1.col_id}</td>
+                  <td><a href="__URL__/index?id={$vo1.col_id}">{$vo1.col_name}</a></td>
+                  <td>{$vo1.col_sid}</td>
+                  <td><a href="__URL__/index?id={$vo1.col_id}"><img src="__PUBLIC__/images/icon/edit2.png" width="16" height="16" /></a></td>
+                </tr>
+              </eq>
+            </volist>
+          </volist>
+        </tbody>
+            </table>            
+   </div>
+  </div><!-- #widget -->
+</div>
+</body>
+</html>
